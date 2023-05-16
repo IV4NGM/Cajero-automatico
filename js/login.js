@@ -17,9 +17,15 @@ function matchUserPassword(){
     if(login==true){
         window.open("index.html", "_self")
     }else{
-        document.getElementById("error").innerHTML = "El usuario y contraseña no coinciden."
+        document.getElementById("error").innerHTML = "Hay un error en el usuario y/o contraseña."
     }
 }
 
 
 document.getElementById("loginButton").addEventListener("click", matchUserPassword);
+
+document.getElementById("password").addEventListener("keyup", function(event){
+    if(event.key=="Enter"){
+        document.getElementById("loginButton").click();
+    }
+})
