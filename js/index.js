@@ -21,7 +21,7 @@ function actualizarDatos(){
 
 function hacerDeposito(){
     if(numDepositos>=maxNumDepositos){
-        alert("Has excedido los " + maxNumDepositos + " depósitos diarios permitidos")
+        alert("Ya has realizado los " + maxNumDepositos + " depósitos diarios permitidos")
     }else{
         let valorADepositar = parseFloat(document.getElementById("deposito").value);
         if(valorDepositosAcumulado+valorADepositar>maxValorDepositos){
@@ -32,6 +32,25 @@ function hacerDeposito(){
             numDepositos++;
             actualizarDatos();
             alert("Depósito realizado exitosamente");
+        }
+    }
+}
+
+function hacerRetiro(){
+    if(numRetiros>=maxNumRetiros){
+        alert("Ya has realizado los " + maxNumRetiros + " retiros diarios permitidos")
+    }else{
+        let valorARetirar = parseFloat(document.getElementById("retiro").value);
+        if(valorRetirosAcumulado+valorARetirar>maxValorRetiros){
+            alert("No puedes retirar más de " + maxValorRetiros + " al día")
+        }else if(saldo<valorARetirar){
+            alert("No dispones de suficiente saldo para realizar esta operación")
+        }else{
+            valorRetirosAcumulado += valorARetirar;
+            saldo -=valorARetirar;
+            numRetiros++;
+            actualizarDatos();
+            alert("Retiro realizado exitosamente");
         }
     }
 }
