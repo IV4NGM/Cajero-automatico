@@ -57,3 +57,7 @@ function hacerRetiro(){
 
 document.getElementById("depositar").addEventListener("click", hacerDeposito);
 document.getElementById("retirar").addEventListener("click", hacerRetiro);
+
+document.querySelectorAll(".text-action").forEach(p => p.addEventListener("click", function(){
+    document.querySelector("#desplegar").style.display = "flex";
+}))
