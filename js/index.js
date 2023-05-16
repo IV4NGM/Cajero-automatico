@@ -2,7 +2,7 @@ user = localStorage.getItem("usuario");
 saldo = parseFloat(localStorage.getItem("saldo"));
 
 document.getElementById("bienvenida").innerHTML = "Bienvenido/a " + user;
-document.getElementById("tuSaldo").innerHTML = "Tu saldo es " + saldo;
+document.getElementById("tuSaldo").innerHTML = "$" + saldo + " MXN";
 
 const maxNumDepositos = 4;
 const maxNumRetiros = 5;
@@ -16,7 +16,7 @@ let valorRetirosAcumulado = 0;
 
 
 function actualizarDatos(){
-    document.getElementById("tuSaldo").innerHTML = "Tu saldo es " + saldo;
+    document.getElementById("tuSaldo").innerHTML = "$" + saldo + " MXN";
 }
 
 function hacerDeposito(){
