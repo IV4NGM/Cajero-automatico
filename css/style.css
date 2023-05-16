@@ -7,6 +7,17 @@ body{
     height: max-content;
 }
 
+.cards-container{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cards-container-titles{
+    display: flex;
+    justify-content: space-around;
+}
+
 .debit-card{
     display: grid;
     grid-template-columns: repeat(2, 350px);
@@ -20,7 +31,7 @@ body{
 
 .card-titles{
     color: #03045e;
-    font-weight: bold
+    font-weight: bold;
 }
 
 .card-details{
@@ -42,18 +53,27 @@ body{
     height: fit-content;
 }
 
-.debit-card p{
+.single-card-container{
+    margin: 20px;
+    padding-top: 20px;
+}
+
+.cards-container p{
     font-size: 20px;
 }
 
 .text-action{
     margin-top: 20px;
-    font-size: 18px !important;
     display: flex;
     justify-content: space-around;
     color: #03045e;
 }
 
+.text-action p{
+    font-size: 16px !important;
+}
+
 .text-action p:hover{
     cursor: pointer;
+    text-decoration: underline;
 }
