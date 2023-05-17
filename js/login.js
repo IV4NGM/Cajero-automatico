@@ -15,7 +15,7 @@ function matchUserPassword(){
         }
     }
     if(login==true){
-        window.open("index.html", "_self")
+        window.open("main.html", "_self")
     }else{
         document.getElementById("error").innerHTML = "Hay un error en el usuario y/o contraseña."
     }
