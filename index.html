@@ -21,20 +21,20 @@
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->
         <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
+          <a class="mdl-navigation__link" href="">Consulta tus movimientos</a>
+          <a class="mdl-navigation__link" href="">Realizar pagos</a>
+          <a class="mdl-navigation__link" href="">Hacer transferencias</a>
+          <a class="mdl-navigation__link" href="login.html">Cerrar sesión</a>
         </nav>
       </div>
     </header>
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Banco Digital IGM</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="">Consulta tus movimientos</a>
+        <a class="mdl-navigation__link" href="">Realizar pagos</a>
+        <a class="mdl-navigation__link" href="">Hacer transferencias</a>
+        <a class="mdl-navigation__link" href="">Cerrar sesión</a>
       </nav>
     </div>
     <main class="mdl-layout__content">
@@ -94,44 +94,66 @@
               </div>
             </div>
             <div class="mdl-card mdl-shadow--2dp single-card-container">
-                <div class="debit-card">
-                    <div class="card-image-container">
-                        <img class="card-image" src="https://www.visa.com.vi/dam/VCOM/regional/lac/ENG/Default/Pay%20With%20Visa/Find%20a%20Card/Debit%20Cards/Debit%20Classic/visaclassicdebit-400x225.jpg" alt="Card">
-                        <p class="card-details">***7066</p>
-                    </div>
-                    <p id="tuSaldo">Tu saldo aquí</p>
+              <div class="debit-card">
+                  <div class="card-image-container">
+                      <img class="card-image" src="https://www.visa.com.vi/dam/VCOM/regional/lac/ENG/Default/Pay%20With%20Visa/Find%20a%20Card/Debit%20Cards/Debit%20Classic/visaclassicdebit-400x225.jpg" alt="Card">
+                      <p class="card-details">***9840</p>
+                  </div>
+                  <p id="tuSaldo">$3281 MXN</p>
+              </div>
+              <div class="text-action-container">
+                  <p class="text-action" id="textDepositar">Depositar</p>
+                  <p class="text-action" id="textRetirar">Retirar</p>
+                  <p class="text-action" id="textHistorial">Historial de transferencias</p>
+              </div>
+              <div class="mdl-card mdl-shadow--2dp action-form" id="desplegarDeposito">
+                  <p>Monto:</p>
+                  <div class="mdl-textfield mdl-js-textfield">
+                      <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="deposito">
+                      <label class="mdl-textfield__label" for="deposito">Ingresa el monto de la operación</label>
+                      <span class="mdl-textfield__error">Debes ingresar un número</span>
+                  </div>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="depositar">
+                      Depositar
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="cancelarDeposito">
+                      Cancelar
+                  </button>
+              </div>
+              <div class="mdl-card mdl-shadow--2dp action-form" id="desplegarRetiro">
+                <p>Monto:</p>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="retiro">
+                    <label class="mdl-textfield__label" for="deposito">Ingresa el monto de la operación</label>
+                    <span class="mdl-textfield__error">Debes ingresar un número</span>
                 </div>
-                <div class="text-action-container">
-                    <p class="text-action">Depositar</p>
-                    <p class="text-action">Retirar</p>
-                    <p class="text-action">Historial de transferencias</p>
-                </div>
-                <div class="action-form">
-                    Magia
-                </div>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="retirar">
+                    Retirar
+                </button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="cancelarRetiro">
+                    Cancelar
+                </button>
             </div>
-
+            <div class="mdl-card mdl-shadow--2dp historial" id="desplegarHistorial">
+                <p class="historial-titles">Descripción</p>
+                <p class="historial-titles">Fecha y hora</p>
+                <p class="historial-titles" id="montoHistorial">Monto</p>
+                <p id="noHistorial">No hay transferencias por mostrar.</p>
+            </div>
         </div>
-        <h3>Selecciona la opción que quieras hacer</h3>
-        <h4>Depositar</h4>
-        <label for="deposito">Cantidad a depositar</label>
-        <input type="number" id="deposito">
-        <button id="depositar">Depositar</button>
-        <h4>Retirar</h4>
-        <label for="retiro">Cantidad a retirar</label>
-        <input type="number" id="retiro">
-        <button id="retirar">Retirar</button>
       </div>
-    </main>
-    <footer class="mdl-mini-footer">
+      <footer class="mdl-mini-footer">
         <div class="mdl-mini-footer__left-section">
           <div class="mdl-logo">Banco Digital IGM</div>
-          <ul class="mdl-mini-footer__link-list">
-            <li><a href="#">Help</a></li>
-            <li><a href="#">Privacy & Terms</a></li>
+        </div>
+        <div class="mdl-mini-footer__right-section">
+          <ul class="mdl-mini-footer__link-list" style="color: white;">
+            <li><a href="">Ayuda</a></li>
+            <li><a href="">Términos y Condiciones</a></li>
           </ul>
         </div>
       </footer>
+    </main>
   </div>
     
     <script src="./js/index.js"></script>

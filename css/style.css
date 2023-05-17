@@ -1,5 +1,16 @@
 body{
     background-color: #caf0f8;
+    background-image: url('../assets/background.webp');
+    background-repeat: no-repeat;
+    background-size: 1600px;
+}
+
+.mdl-layout__header{
+    background-color: #023e8a;
+}
+
+h2{
+    color: #03045e;
 }
 
 .page-content{
@@ -17,6 +28,7 @@ body{
     padding-top: 20px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 50px;
 }
 
 .cards-container-titles{
@@ -60,7 +72,7 @@ body{
 }
 
 .single-card-container{
-    margin: 20px;
+    margin: 10px 20px 30px 20px;
     padding-top: 20px;
 }
 
@@ -124,4 +136,15 @@ body{
 
 .bold-text{
     font-weight: bold;
+}
+
+.mdl-mini-footer{
+    background-color: #023e8a;
+    height: 15px;
+    align-content: space-around;
+    padding-left: 30px;
+}
+
+footer{
+    width: 100%;
 }
