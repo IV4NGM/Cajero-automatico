@@ -2,6 +2,12 @@ body{
     background-color: #caf0f8;
 }
 
+.page-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .mdl-card{
     width: max-content;
     height: max-content;
@@ -83,8 +89,39 @@ body{
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+    width: 100%;
+    height: 100px;
+    min-height: 0;
 }
 
 .action-form p{
     margin: 0;
+}
+
+.historial{
+    display: none;
+    grid-template-columns: repeat(3, auto);
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    justify-items: center;
+    min-height: 0;
+    padding-top: 10px;
+}
+
+.historial p{
+    font-size: 16px;
+}
+
+.historial-titles{
+    color: #03045e;
+    font-size: 18px !important;
+}
+
+.historial-show{
+    display: grid;
+}
+
+.bold-text{
+    font-weight: bold;
 }
