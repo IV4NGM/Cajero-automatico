@@ -1,5 +1,6 @@
-user = localStorage.getItem("usuario");
-saldo = parseFloat(localStorage.getItem("saldo"));
+let user = localStorage.getItem("usuario");
+let saldoUsuario = localStorage.getItem("saldo-usuario").toString()
+let saldo = parseFloat(localStorage.getItem(saldoUsuario));
 
 document.getElementById("bienvenida").innerHTML = "Bienvenido/a " + user;
 document.getElementById("tuSaldo").innerHTML = "$" + saldo + " MXN";
@@ -17,6 +18,7 @@ let valorRetirosAcumulado = 0;
 
 function actualizarDatos(){
     document.getElementById("tuSaldo").innerHTML = "$" + saldo + " MXN";
+    localStorage.setItem(saldoUsuario, saldo.toString());
 }
 
 function cancelarDeposito(){

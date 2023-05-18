@@ -1,6 +1,7 @@
 let users = ["Ana", "Beto", "Carlos", "Daniel"];
 let passwords = ["usuario1", "usuario2", "usuario3", "usuario4"];
 let saldos = [10000, 35000, 8000, 15500];
+let saldoNombreString = "saldo-";
 
 function matchUserPassword(){
     let userInput = document.getElementById("user").value;
@@ -10,7 +11,11 @@ function matchUserPassword(){
         if(userInput===users[i] && passwordInput===passwords[i]){
             login = true;
             localStorage.setItem("usuario", userInput);
-            localStorage.setItem("saldo", saldos[i].toString());
+            saldoNombreString = "saldo-" + userInput.toString();
+            localStorage.setItem("saldo-usuario", saldoNombreString);
+            if(localStorage.getItem(saldoNombreString)==null){
+                localStorage.setItem(saldoNombreString, saldos[i].toString());
+            }
             break;
         }
     }
