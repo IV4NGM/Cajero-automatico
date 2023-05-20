@@ -1,9 +1,14 @@
 let user = localStorage.getItem("usuario");
 let saldoUsuario = localStorage.getItem("saldo-usuario").toString()
 let saldo = parseFloat(localStorage.getItem(saldoUsuario));
+let saldoUsuario1 = localStorage.getItem("saldo-usuario-1").toString()
+let saldo1 = parseFloat(localStorage.getItem(saldoUsuario1));
+let saldosArray = [saldo, saldo1];
+let saldosUsuarioArray = [saldoUsuario, saldoUsuario1];
 
 document.getElementById("bienvenida").innerHTML = "Bienvenido/a " + user;
-document.getElementById("tuSaldo").innerHTML = "$" + saldo + " MXN";
+document.getElementById("tuSaldo0").innerHTML = "$" + saldo + " MXN";
+document.getElementById("tuSaldo1").innerHTML = "$" + saldo1 + " MXN";
 
 const maxNumDepositos = 4;
 const maxNumRetiros = 5;
@@ -16,31 +21,31 @@ let valorDepositosAcumulado = 0;
 let valorRetirosAcumulado = 0;
 
 
-function actualizarDatos(){
-    document.getElementById("tuSaldo").innerHTML = "$" + saldo + " MXN";
-    localStorage.setItem(saldoUsuario, saldo.toString());
+function actualizarDatos(numId){
+    document.getElementById("tuSaldo" + numId).innerHTML = "$" + saldosArray[numId] + " MXN";
+    localStorage.setItem(saldosUsuarioArray[numId], saldosArray[numId].toString());
 }
 
-function cancelarDeposito(){
-    document.getElementById("textDepositar").style.fontWeight = "normal";
-    document.getElementById("desplegarDeposito").style.display = "none";
+function cancelarDeposito(numId){
+    document.getElementById("textDepositar" + numId).style.fontWeight = "normal";
+    document.getElementById("desplegarDeposito" + numId).style.display = "none";
 }
 
-function cancelarRetiro(){
-    document.getElementById("textRetirar").style.fontWeight = "normal";
-    document.getElementById("desplegarRetiro").style.display = "none";
+function cancelarRetiro(numId){
+    document.getElementById("textRetirar" + numId).style.fontWeight = "normal";
+    document.getElementById("desplegarRetiro" + numId).style.display = "none";
 }
 
-function cancelarHistorial(){
-    if(document.getElementById("textHistorial").classList.contains("bold-text")){
-        document.getElementById("textHistorial").classList.toggle("bold-text");
-        document.getElementById("desplegarHistorial").classList.toggle("historial-show");
+function cancelarHistorial(numId){
+    if(document.getElementById("textHistorial" + numId).classList.contains("bold-text")){
+        document.getElementById("textHistorial" + numId).classList.toggle("bold-text");
+        document.getElementById("desplegarHistorial" + numId).classList.toggle("historial-show");
     }
 }
 
-function guardarHistorial(cantidad, descripcion){
-    document.getElementById("noHistorial").style.display = "none";
-    let textoMonto = document.getElementById("montoHistorial");
+function guardarHistorial(cantidad, descripcion, numId){
+    document.getElementById("noHistorial" + numId).style.display = "none";
+    let textoMonto = document.getElementById("montoHistorial" + numId);
     let textoDescripcion = document.createElement("p");
     let textoHora = document.createElement("p");
     let textoCantidad = document.createElement("p");
@@ -60,70 +65,90 @@ function guardarHistorial(cantidad, descripcion){
     textoMonto.parentNode.appendChild(textoCantidad);
 }
 
-function hacerDeposito(){
+function hacerDeposito(numId){
     if(numDepositos>=maxNumDepositos){
         alert("Ya has realizado los " + maxNumDepositos + " depósitos diarios permitidos")
     }else{
-        let valorADepositar = parseFloat(document.getElementById("deposito").value);
+        let valorADepositar = parseFloat(document.getElementById("deposito" + numId).value);
         if(valorDepositosAcumulado+valorADepositar>maxValorDepositos){
             alert("No puedes depositar más de " + maxValorDepositos + " al día")
         }else{
             valorDepositosAcumulado += valorADepositar;
-            saldo +=valorADepositar;
+            saldosArray[numId] +=valorADepositar;
             numDepositos++;
-            actualizarDatos();
-            guardarHistorial(valorADepositar, "Depósito");
+            actualizarDatos(numId);
+            guardarHistorial(valorADepositar, "Depósito", numId);
             alert("Depósito realizado exitosamente");
         }
     }
-    cancelarDeposito();
+    cancelarDeposito(numId);
 }
 
-function hacerRetiro(){
+function hacerRetiro(numId){
     if(numRetiros>=maxNumRetiros){
         alert("Ya has realizado los " + maxNumRetiros + " retiros diarios permitidos")
     }else{
-        let valorARetirar = parseFloat(document.getElementById("retiro").value);
+        let valorARetirar = parseFloat(document.getElementById("retiro" + numId).value);
         if(valorRetirosAcumulado+valorARetirar>maxValorRetiros){
             alert("No puedes retirar más de " + maxValorRetiros + " al día")
-        }else if(saldo<valorARetirar){
+        }else if(saldosArray[numId]<valorARetirar){
             alert("No dispones de suficiente saldo para realizar esta operación")
         }else{
             valorRetirosAcumulado += valorARetirar;
-            saldo -=valorARetirar;
+            saldosArray[numId] -=valorARetirar;
             numRetiros++;
-            actualizarDatos();
-            guardarHistorial(valorARetirar, "Retiro");
+            actualizarDatos(numId);
+            guardarHistorial(valorARetirar, "Retiro", numId);
             alert("Retiro realizado exitosamente");
         }
     }
-    cancelarRetiro();
+    cancelarRetiro(numId);
 }
 
-document.getElementById("depositar").addEventListener("click", hacerDeposito);
-document.getElementById("retirar").addEventListener("click", hacerRetiro);
+let cantidadTarjetas = 2;
 
-document.getElementById("textDepositar").addEventListener("click", function(){
-    document.getElementById("textDepositar").style.fontWeight = "bold";
-    document.getElementById("desplegarDeposito").style.display = "flex";
-    cancelarRetiro();
-    cancelarHistorial();
+function agregarEventosBotones(num){
+    for(let j = 0; j < num; j++){
+        let i = j.toString();
+        document.getElementById("depositar" + i).addEventListener("click", function(){
+            hacerDeposito(i);
+        });
+
+        document.getElementById("retirar" + i).addEventListener("click", function(){
+            hacerRetiro(i);
+        });
+
+        document.getElementById("textDepositar" + i).addEventListener("click", function(){
+            document.getElementById("textDepositar" + i).style.fontWeight = "bold";
+            document.getElementById("desplegarDeposito" + i).style.display = "flex";
+            cancelarRetiro(i);
+            cancelarHistorial(i);
+        })
+        
+        document.getElementById("cancelarDeposito" + i).addEventListener("click", function(){
+            cancelarDeposito(i);
+        })
+        
+        document.getElementById("textRetirar" + i).addEventListener("click", function(){
+            document.getElementById("textRetirar" + i).style.fontWeight = "bold";
+            document.getElementById("desplegarRetiro" + i).style.display = "flex";
+            cancelarDeposito(i);
+            cancelarHistorial(i);
+        })
+        
+        document.getElementById("cancelarRetiro" + i).addEventListener("click", function(){
+            cancelarRetiro(i);
+        });
+        
+        document.getElementById("textHistorial" + i).addEventListener("click", function(){
+            document.getElementById("textHistorial" + i).classList.toggle("bold-text");
+            document.getElementById("desplegarHistorial" + i).classList.toggle("historial-show");
+            cancelarDeposito(i);
+            cancelarRetiro(i);
+        });
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    agregarEventosBotones(cantidadTarjetas);
 })
-
-document.getElementById("cancelarDeposito").addEventListener("click", cancelarDeposito)
-
-document.getElementById("textRetirar").addEventListener("click", function(){
-    document.getElementById("textRetirar").style.fontWeight = "bold";
-    document.getElementById("desplegarRetiro").style.display = "flex";
-    cancelarDeposito();
-    cancelarHistorial();
-})
-
-document.getElementById("cancelarRetiro").addEventListener("click", cancelarRetiro);
-
-document.getElementById("textHistorial").addEventListener("click", function(){
-    document.getElementById("textHistorial").classList.toggle("bold-text");
-    document.getElementById("desplegarHistorial").classList.toggle("historial-show");
-    cancelarDeposito();
-    cancelarRetiro();
-});
